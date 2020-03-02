@@ -12,6 +12,7 @@ def weather_by_city(city_name):
     }
     try:
         result = requests.get(weather_url, params=params)
+        result.raise_for_status()
         weather = result.json()
         if 'data' in weather:
             if 'current_condition' in weather['data']:
@@ -20,7 +21,7 @@ def weather_by_city(city_name):
                 except(IndexError, TypeError):
                     return False
         return False
-    except (requests.RequestException):
+    except (requests.RequestException, ValueError):
         print('Сетевая ошибка')
         return False
 
