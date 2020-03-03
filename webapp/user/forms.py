@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import BooleanField, PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired
 
 
@@ -12,6 +12,10 @@ class LoginForm(FlaskForm):
                              render_kw={"class": "form-control",
                              "placeholder": "Введите пароль"}
                              )
+    remember_me = BooleanField('Запомнить меня', render_kw={
+                                "class": "form-check-input"
+                                }
+                               )
     submit = SubmitField('Войти', render_kw={
                              "class": "btn btn-success btn-lg btn-block"
                              }
