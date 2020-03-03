@@ -16,7 +16,7 @@
             <h2>Новости</h2>
             {% for n in news %}
             <h3><a href='{{ n.url }}'>{{ n.title }}'</a></h3>
-            <p>{{ n.published }}</p>
+            <p>{{ n.published.strftime('%Y.%m.%d') }}</p>
             <hr color=red>
             {% endfor %}
         </div>    
