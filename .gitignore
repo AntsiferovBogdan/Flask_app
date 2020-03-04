@@ -3,4 +3,4 @@ __pycache__/
 env/
 config.py
 webapp.db
-
+.DS_store
