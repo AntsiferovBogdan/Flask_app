@@ -36,9 +36,10 @@ class RegistrationForm(FlaskForm):
                              render_kw={"class": "form-control",
                              "placeholder": "Задайте пароль"}
                              )
-    confirm = PasswordField([DataRequired(), EqualTo("password")],
+    confirm = PasswordField("Повторите пароль",
+                            [DataRequired(), EqualTo("password")],
                             render_kw={"class": "form-control",
-                            "placeholder": "Повторите пароль"}
+                                       "placeholder": "Повторите пароль"}
                             )
     submit = SubmitField("Зарегистрироваться", render_kw={
                              "class": "btn btn-success btn-lg btn-block"

@@ -7,6 +7,16 @@ from webapp.user.models import User
 blueprint = Blueprint('user', __name__, url_prefix='/users')
 
 
+@blueprint.route("/registration")
+def registration():
+    if current_user.is_authenticated:
+        return redirect(url_for("news.index"))
+    title_reg = "Регистрация"
+    reg_form = RegistrationForm()
+    return render_template("user/registration.html", title_reg=title_reg,
+                           reg_form=reg_form)
+
+
 @blueprint.route('/process-registration', methods=['POST'])
 def process_registration():
     reg_form = RegistrationForm()
@@ -18,8 +28,13 @@ def process_registration():
         db.session.commit()
         flash('Вы успешно зарегистрировались, зайдите под своим именем.')
         return redirect(url_for('user.login'))
+    else:
+        for field, errors in reg_form.errors.items():
+            for error in errors:
+                flash(f"Ошибка в поле '{getattr(reg_form, field).label.text}': - {error}")
+        return redirect(url_for('user.registration'))
     flash('Пожалуйста, исправьте ошибки в форме')
-    return redirect(url_for('user.login'))
+    return redirect(url_for('user.registration'))
 
 
 @blueprint.route("/login")
@@ -28,11 +43,8 @@ def login():
         return redirect(url_for("news.index"))
     title_auth = "Авторизация"
     login_form = LoginForm()
-    title_reg = "Регистрация"
-    reg_form = RegistrationForm()
     return render_template("user/login.html", title_auth=title_auth,
-                           title_reg=title_reg, login_form=login_form,
-                           reg_form=reg_form)
+                           login_form=login_form)
 
 
 @blueprint.route('/process-login', methods=['POST'])
