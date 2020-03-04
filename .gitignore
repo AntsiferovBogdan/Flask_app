@@ -5,3 +5,4 @@ config.py
 <<<<<<< HEAD
 webapp.db
 .DS_store
+migrations/

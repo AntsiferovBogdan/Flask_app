@@ -8,6 +8,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(48), index=True, unique=True)
     password = db.Column(db.String(128))
     role = db.Column(db.String(10), index=True)
+    email = db.Column(db.String(64))
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -20,4 +21,4 @@ class User(db.Model, UserMixin):
         return self.role == 'admin'
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '{}'.format(self.username)
