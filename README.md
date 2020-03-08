@@ -6,8 +6,6 @@ Flask-приложение
 ---------
 Создайте и активируйте виртуальное окружение:
 
-.. code-block:: text
-
     pip install -r requirements.txt
 
 Настройка
