@@ -1,9 +1,9 @@
 from getpass import getpass
-import sys
-
 from webapp import create_app
 from webapp.db import db
 from webapp.user.models import User
+
+import sys
 
 app = create_app()
 

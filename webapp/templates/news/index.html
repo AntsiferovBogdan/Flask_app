@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Новости</h1>    
 <div class="row">
-        <div class="col-8">
+        <div class="col-7">
           {% with messages = get_flashed_messages() %}
           {% if messages %}
           <div class="alert alert-warning" role="alert">
@@ -14,12 +14,13 @@
           {% endif %}
           {% endwith %}  
             {% for n in news %}
-            <h3><a href="{{ n.url }}"">{{ n.title }}'</a></h3>
-            <p>{{ n.published.strftime('%Y.%m.%d') }}</p>
+            <h3><a href="{{ n.url }}">{{ n.title }}</a></h3>
+            <p>{{ n.published.strftime('%d %B %Y в %H:%M') }}</p>
             <hr color=red>
             {% endfor %}
         </div>    
-        <div class="col-4">
+        <div class="col-2"></div>
+        <div class="col-3">
             <h2>Текущая погода</h2>
             {% if weather %}
               {% if '-' not in weather.temp_C and '-' not in weather.FeelsLikeC %} 
