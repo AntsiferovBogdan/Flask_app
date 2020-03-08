@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h1>Новости</h1>    
+{% block content %}  
 <div class="row">
         <div class="col-7">
           {% with messages = get_flashed_messages() %}
@@ -13,10 +12,10 @@
           </div>
           {% endif %}
           {% endwith %}  
-            {% for n in news %}
-            <h3><a href="{{ n.url }}">{{ n.title }}</a></h3>
-            <p>{{ n.published.strftime('%d %B %Y в %H:%M') }}</p>
-            <hr color=red>
+            {% for news in news_list %}
+            <h3><a href="{{ url_for('news.single_news', news_id=news.id) }}">{{ news.title }}</a></h3>
+            <p>{{ news.published.strftime('%d-%m-%Y в %H:%M') }}</p>
+            <hr style="background-color: #f0db80;">
             {% endfor %}
         </div>    
         <div class="col-2"></div>

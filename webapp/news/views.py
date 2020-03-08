@@ -7,20 +7,21 @@ blueprint = Blueprint('news', __name__)
 
 @blueprint.route('/')
 def index():
-    title = 'Daily Bugle'
+    title = "Новости"
     weather = weather_by_city(current_app.config['WEATHER_DEFAULT_CITY'])
-    news = News.query.order_by(News.published.desc()).all()
+    news_list = News.query.filter(News.text.isnot(None)).order_by(News.published.desc()).all()
     return render_template('news/index.html', page_title=title,
-                           weather=weather, news=news
+                           weather=weather, news_list=news_list
                            )
 
 
 @blueprint.route('/news/<int:news_id>')
 def single_news(news_id):
-    my_news = News.query.filter(News.id == news_id).first()
-    if not my_news:
+    chosen_news = News.query.filter(News.id == news_id).first()
+    if not chosen_news:
         abort(404)
 
-    return render_template('news/single_news.html', page_title=my_news.title,
-                           news=my_news
+    return render_template('news/single_news.html',
+                           page_title=chosen_news.title,
+                           chosen_news=chosen_news
                            )
