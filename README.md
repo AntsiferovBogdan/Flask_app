@@ -16,23 +16,21 @@ Flask-приложение
 
 .. code-block:: python
 
-  import os
+    import os
 
-  from datetime import timedelta
+    from datetime import timedelta
 
-  basedir = os.path.abspath(os.path.dirname(__file__))
+    basedir = os.path.abspath(os.path.dirname(__file__))
 
-  SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir,
-                                                        '..', 'webapp.db'
-                                                        )
-  WEATHER_DEFAULT_CITY = 'CITY,COUNTRY'
-  WEATHER_API_KEY = 'API_KEY'
-  WEATHER_URL = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '..', 'webapp.db')
+    WEATHER_DEFAULT_CITY = 'CITY,COUNTRY'
+    WEATHER_API_KEY = 'API_KEY'
+    WEATHER_URL = 'http://api.worldweatheronline.com/premium/v1/weather.ashx'
 
-  SECRET_KEY = 'SECRET_KEY'
-  REMEMBER_COOKIE_DURATION = timedelta(days=30)
+    SECRET_KEY = 'SECRET_KEY'
+    REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
-  SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 Запуск
 -------
