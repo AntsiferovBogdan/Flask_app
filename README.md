@@ -12,8 +12,6 @@ Flask-приложение
 ---------
 Создайте файл config.py, добавьте следующие настройки:
 
-.. code-block:: python
-
     import os
 
     from datetime import timedelta
@@ -34,7 +32,5 @@ Flask-приложение
 -------
 
 В активированном виртуальном окружении введите:
-
-.. code-block:: text
 
     ./run.sh
