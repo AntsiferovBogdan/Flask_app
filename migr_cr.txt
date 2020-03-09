@@ -1,0 +1,4 @@
+export FLASK_APP=webapp && flask db init
+export FLASK_APP=webapp && flask db migrate -m "commit"
+flask db stamp 84cccf62ee91
+flask db upgrade

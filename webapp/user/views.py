@@ -3,6 +3,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from webapp.db import db
 from webapp.user.forms import LoginForm, RegistrationForm
 from webapp.user.models import User
+from webapp.utils import get_redirect_target
 
 blueprint = Blueprint('user', __name__, url_prefix='/users')
 
@@ -10,23 +11,23 @@ blueprint = Blueprint('user', __name__, url_prefix='/users')
 @blueprint.route("/registration")
 def registration():
     if current_user.is_authenticated:
-        return redirect(url_for("news.index"))
+        return redirect(get_redirect_target())
     title_reg = "Регистрация"
-    reg_form = RegistrationForm()
+    form = RegistrationForm()
     return render_template("user/registration.html", title_reg=title_reg,
-                           reg_form=reg_form)
+                           form=form)
 
 
 @blueprint.route('/process-registration', methods=['POST'])
 def process_registration():
-    reg_form = RegistrationForm()
-    if reg_form.validate_on_submit():
-        new_user = User(username=reg_form.username.data,
-                        email=reg_form.email.data, role='user')
-        new_user.set_password(reg_form.password.data)
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        new_user = User(username=form.username.data,
+                        email=form.email.data, role='user')
+        new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
-        flash('Вы успешно зарегистрировались, зайдите под своим именем.')
+        flash('Вы успешно зарегистрировались, войдите под своим именем.')
         return redirect(url_for('user.login'))
     else:
         for field, errors in reg_form.errors.items():
@@ -40,11 +41,11 @@ def process_registration():
 @blueprint.route("/login")
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for("news.index"))
+        return redirect(get_redirect_target())
     title_auth = "Авторизация"
-    login_form = LoginForm()
+    form = LoginForm()
     return render_template("user/login.html", title_auth=title_auth,
-                           login_form=login_form)
+                           form=form)
 
 
 @blueprint.route('/process-login', methods=['POST'])
@@ -55,7 +56,7 @@ def process_login():
         if user and user.check_password(form.password.data):
             login_user(user, remember=form.remember_me.data)
             flash(f'С возвращением, {user}')
-            return redirect(url_for('news.index'))
+            return redirect(get_redirect_target())
 
     flash('Неправильное имя пользователя или пароль')
     return redirect(url_for('user.login'))
@@ -73,4 +74,4 @@ def admin_index():
 @blueprint.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('news.index'))
+    return redirect(get_redirect_target())

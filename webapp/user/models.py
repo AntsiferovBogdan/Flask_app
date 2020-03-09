@@ -21,4 +21,4 @@ class User(db.Model, UserMixin):
         return self.role == 'admin'
 
     def __repr__(self):
-        return '{}'.format(self.username)
+        return f'{self.username}'

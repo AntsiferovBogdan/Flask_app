@@ -1,0 +1,15 @@
+<div class="col-2"></div>
+<div class="col-3">
+    <h3>Текущая погода</h3>
+    {% if weather %}
+        {% if '-' not in weather.temp_C and '-' not in weather.FeelsLikeC %} 
+        +{{ weather.temp_C }}, ощущается как +{{ weather.FeelsLikeC }}
+        {% elif '-' not in weather.temp_C %}
+        +{{ weather.temp_C }}, ощущается как {{ weather.FeelsLikeC }}
+        {% else %} 
+        {{ weather.temp_C }}, ощущается как {{ weather.FeelsLikeC }}
+        {% endif %}
+    {% else %}
+        Сервис погоды временно недоступен
+    {% endif %}
+</div>
