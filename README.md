@@ -28,7 +28,7 @@ Flask-приложение
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
-Создайте исполняемый скрип:
+Создайте исполняемый скрипт:
 
     chmod +x run.sh
 
