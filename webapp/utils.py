@@ -12,6 +12,6 @@ def get_redirect_target():
     for target in request.values.get('next'), request.referrer:
         if not target:
             continue
-            #return redirect(url_for('news.index'))
+            return redirect(url_for('news.index'))
         if is_safe_url(target):
             return target

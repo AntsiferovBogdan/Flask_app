@@ -27,6 +27,10 @@ Flask-приложение
     REMEMBER_COOKIE_DURATION = timedelta(days=30)
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+Создайте исполняемый скрипт:
+
+    chmod +x run.sh
 
 Запуск
 -------
