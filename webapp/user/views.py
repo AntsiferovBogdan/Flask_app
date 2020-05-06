@@ -30,9 +30,9 @@ def process_registration():
         flash('Вы успешно зарегистрировались, войдите под своим именем.')
         return redirect(url_for('user.login'))
     else:
-        for field, errors in reg_form.errors.items():
+        for field, errors in form.errors.items():
             for error in errors:
-                flash(f"Ошибка в поле '{getattr(reg_form, field).label.text}': - {error}")
+                flash(f"Ошибка в поле '{getattr(form, field).label.text}': - {error}")
         return redirect(url_for('user.registration'))
     flash('Пожалуйста, исправьте ошибки в форме')
     return redirect(url_for('user.registration'))
